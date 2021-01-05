@@ -5,7 +5,7 @@ A cli command that allows you to write `<deno>` tags in your html files.
 It looks for `<deno>` tags in a supplied input file and replaces the `<deno>`
 tags found with the output from running `deno` with their attributes.
 
-The result is written to `stdout`.
+The result is written to `stdout` and can be piped to the desired output.
 
 ## Attributes
 
