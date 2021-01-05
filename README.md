@@ -23,6 +23,16 @@ The `<deno>` tag needs to have one of these two attributes present:
   Any other attribute on the tag gets passed as argument to the `Deno.run`
   command. Boolean attributes get the string "true" added as value.
 
+## How to run
+
+Call `deno_tag` from the command line and specify a `html` file:
+
+`> deno run --allow-read --allow-run --unstable https://deno.land/x/deno_tag@v1.0.2 index.html`
+
+It is necessary to have read and run permissions in order to read the file
+passed as an attribute on the `<deno>` tag and run it.
+
+
 ## Examples
 
 ### Example 1 - Simple output bundle
