@@ -7,6 +7,8 @@ tags found with the output from running `deno` with their attributes.
 
 The result is written to `stdout` and can be piped to the desired output.
 
+I wrote [a blog post about this project](https://hugodaniel.com/posts/introducing-deno-tag/) that serves as a less dry description of it.
+
 ## Attributes
 
 The `<deno>` tag needs to have one of these two attributes present:
