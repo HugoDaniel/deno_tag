@@ -57,14 +57,13 @@ export async function denoTag(text: string, options?: DenoTagOptions) {
  * Bundler is called when a `<deno bundle="code.ts">` is found.
  * Runner is called when a `<deno run="code.ts">` is found.
  */
-interface DenoTagOptions {
+export interface DenoTagOptions {
   bundler?: typeof Deno.bundle;
   bundleSources?: Record<string, string>;
   bundleOptions?: Deno.CompilerOptions;
   runner?: typeof Deno.run;
   runOptions?: Deno.RunOptions;
 }
-export type { DenoTagOptions };
 
 /**
  * This function will perform the `bundler` or the `runner` action on a
