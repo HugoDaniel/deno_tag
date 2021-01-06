@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Export the `DenoTagOptions` interface (no longer exported as a type object)
+- Updated CLI usage examples in the README file
 
 ## [1.0.2] - 2021-01-05
 ### Added
