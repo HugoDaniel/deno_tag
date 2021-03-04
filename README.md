@@ -30,7 +30,7 @@ The `<deno>` tag needs to have one of these two attributes present:
 
 Call `deno_tag` from the command line and specify a `html` file:
 
-`> deno run --allow-read --allow-run --unstable https://deno.land/x/deno_tag@v1.0.2/deno_tag.ts index.html`
+`> deno run --allow-read --allow-run --unstable https://deno.land/x/deno_tag@v1.1.0/deno_tag.ts index.html`
 
 It is necessary to have read and run permissions in order to read the file
 passed as an attribute on the `<deno>` tag and run it.
@@ -85,7 +85,7 @@ export { complexFunction };
 
 Running `deno_tag` on it:
 
-`> deno run --allow-read --allow-run --unstable https://deno.land/x/deno_tag@v1.0.2/deno_tag.ts ./examples/1\ -\ simple\ output\ bundle/index.html`
+`> deno run --allow-read --allow-run --unstable https://deno.land/x/deno_tag@v1.1.0/deno_tag.ts ./examples/1\ -\ simple\ output\ bundle/index.html`
 
 Produces the following output:
 
@@ -220,7 +220,7 @@ permissions set.
 
 After running:
 
-`> deno run --allow-read --allow-run --unstable https://deno.land/x/deno_tag@v1.0.2/deno_tag.ts index.html`
+`> deno run --allow-read --allow-run --unstable https://deno.land/x/deno_tag@v1.1.0/deno_tag.ts index.html`
 
 The output is:
 
