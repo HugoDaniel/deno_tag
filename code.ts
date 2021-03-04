@@ -1,3 +1,6 @@
+// Copyright 2021 Hugo Daniel Henriques Oliveira Gomes. All rights reserved.
+// Licensed under the EUPL
+import { defaultBundler } from "./defaults.ts";
 /** 
  * The main function of deno-tag, it does three things:
  * 1. Looks for `<deno>` tags on the supplied text and reads their attributes
@@ -58,9 +61,8 @@ export async function denoTag(text: string, options?: DenoTagOptions) {
  * Runner is called when a `<deno run="code.ts">` is found.
  */
 export interface DenoTagOptions {
-  bundler?: typeof Deno.bundle;
-  bundleSources?: Record<string, string>;
-  bundleOptions?: Deno.CompilerOptions;
+  bundler?: typeof defaultBundler;
+  bundleOptions?: Deno.EmitOptions;
   runner?: typeof Deno.run;
   runOptions?: Deno.RunOptions;
 }
@@ -108,13 +110,13 @@ async function runDeno(args: Map<string, string>, options?: DenoTagOptions) {
     stdout: "piped",
   }; // ^ by default call "deno run" with the stdout piped to a Uint8Array, this
   // allows output to be caught by this process (parent) and handled later on.
-  const bundler = options?.bundler || Deno.bundle;
+  const bundler = options?.bundler || defaultBundler;
   // Prepare to run the supplied action attribute on the file from its value
   // The output of the runner (`Deno.run` by default) is a Uint8Array which is
   // processed by the TextDecoder into a JS string after the run finishes.
   let runOutput: Uint8Array;
   // deno-lint-ignore prefer-const
-  let bundleOutput: [Deno.Diagnostic[] | undefined, string];
+  let bundleOutput: Deno.EmitResult;
   let result = "";
   switch (action) {
     case "run":
@@ -130,16 +132,15 @@ async function runDeno(args: Map<string, string>, options?: DenoTagOptions) {
       }
       break;
     case "bundle":
-      // The bundle action will by default dump the file and all its
-      // dependencies into a string.
+      // The "files" of the result will contain a single key named
+      // "deno:///bundle.js" of which the value with be the resulting bundle.
       bundleOutput = await bundler(
         file,
-        options?.bundleSources,
         options?.bundleOptions,
       );
-      // The bundler output is a pair of [Diagnostic, Output]
-      // The result is the output string - indexed by 1
-      result = bundleOutput[1];
+      // The bundler output is an EmitResult object.
+      // The result is the single key "deno:///bundle.js" of the files object
+      result = bundleOutput.files["deno:///bundle.js"];
       break;
   }
   // The string with the output of the action that was performed

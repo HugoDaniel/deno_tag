@@ -12,6 +12,7 @@
  */
 
 import { denoTag } from "./code.ts";
+import { defaultBundler } from "./defaults.ts";
 import {
   assert,
   assertEquals,
@@ -150,10 +151,10 @@ Deno.test(
   "Calls the bundler function with the value from the <deno> tag",
   async () => {
     const file = "test.ts";
-    const bundler: typeof Deno.bundle = (value) => {
+    const bundler: typeof defaultBundler = (value, opts) => {
       assertEquals(value, file);
       return Promise.resolve(
-        [undefined, ""] as [Deno.Diagnostic[] | undefined, string],
+        { files: { "deno:///bundle.js": "" } } as unknown as Deno.EmitResult,
       );
     };
     const htmlText = `<deno bundle="${file}" />`;
